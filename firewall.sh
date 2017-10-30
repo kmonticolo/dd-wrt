@@ -43,7 +43,7 @@ iptables -t mangle -A POSTROUTING -o $modemif -p tcp --dport 139 -j CLASSIFY --s
 tc qdisc add dev $modemif root handle 1: htb default 12
 tc class add dev $modemif parent 1: classid 1:1 htb rate 29700kbit ceil 29700kbit burst 10k
 tc class add dev $modemif parent 1:1 classid 1:10 htb rate 5000kbit ceil 25000kbit prio 1 burst 10k
-tc class add dev $modemif parent 1:1 classid 1:12 htb rate 1000kbit ceil 1000kbit prio 2
+tc class add dev $modemif parent 1:1 classid 1:12 htb rate 1000kbit ceil 5000kbit prio 2
 tc filter add dev $modemif protocol ip parent 1:0 prio 1 u32 match ip protocol 0x11 0xff flowid 1:10
 tc qdisc add dev $modemif parent 1:10 handle 20: sfq perturb 10
 tc qdisc add dev $modemif parent 1:12 handle 30: sfq perturb 10
