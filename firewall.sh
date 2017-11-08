@@ -2,7 +2,7 @@
 # Personal note : add rules to /etc/rc.local file so they will be loaded after booting up
 # Change modemif to your network interface value
 
-modemif=br0
+modemif=vlan1
 
 iptables -t mangle -N ack
 iptables -t mangle -A ack -m tos ! --tos Normal-Service -j RETURN
